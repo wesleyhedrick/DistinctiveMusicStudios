@@ -29,10 +29,8 @@ app.engine('html', es6Renderer);
 app.set('views', 'templates');
 app.set('view engine', 'html');
 const server = http.createServer(app);
-app.get('/', (req, res) => {
-    res.send('Your app is running. Start building!')
-});
 
+app.use('/api/student', studentRouter)
 //Error Handling for Bad Routes
 app.get('*', (req, res) => {
     res.status(404).send('<h1>Page not found</h1>');
