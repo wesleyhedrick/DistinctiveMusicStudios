@@ -13,12 +13,12 @@ module.exports = (sequelize, DataTypes) => {
             // define association here
         }
     };
-    instruments.init({
+    Instruments.init({
         name: DataTypes.STRING,
         class: DataTypes.STRING
     }, {
-            sequelize,
-            modelName: 'Instruments',
-        });
-    return instruments;
+        sequelize,
+        modelName: 'Instruments',
+    });
+    return Instruments;
 };

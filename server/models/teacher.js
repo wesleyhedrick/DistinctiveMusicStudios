@@ -22,7 +22,11 @@ module.exports = (sequelize, DataTypes) => {
         instrument_4: DataTypes.INTEGER,
         instrument_5: DataTypes.INTEGER,
         status: DataTypes.INTEGER,
-        date_hired: DataTypes.DATE
+        date_hired: DataTypes.DATE,
+        phone: DataTypes.STRING,
+        email: { type: DataTypes.STRING, allowNull: false, unique: true },
+        hash: { type: DataTypes.STRING, allowNull: false }
+
     }, {
             sequelize,
             modelName: 'Teacher',

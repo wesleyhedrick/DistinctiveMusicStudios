@@ -13,11 +13,11 @@ module.exports = (sequelize, DataTypes) => {
             // define association here
         }
     };
-    status.init({
+    Status.init({
         name: DataTypes.STRING
     }, {
-            sequelize,
-            modelName: 'Status',
-        });
-    return status;
+        sequelize,
+        modelName: 'Status',
+    });
+    return Status;
 };

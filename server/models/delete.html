@@ -1,0 +1,287 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+        <macro id="nlheader">
+            <table class="header" style="width:100%;">
+                <tr>
+	                <td style="width:50%">
+                        <table align="left" border="0" cellpadding="1" cellspacing="1" style="width: 159px;">
+                            <tr>
+		            <td colspan="5" style="text-align: left; display: block; width: 153px;">
+		                <div style="width:100%;text-align:left;"><#if subsidiary.logo@Url?length != 0><img src="${subsidiary.logo@Url}" /> </#if></div>
+		            </td>
+		</tr></table>
+	</td>
+	<td style="width:30%">
+	<table align="center" border="0" cellpadding="0" cellspacing="0"><tr>
+		<td class="comp-font" style="text-align: left;">${subsidiary.addressee}</td>
+		</tr>
+		<tr>
+		<td height="5">&nbsp;</td>
+		</tr>
+		<tr>
+		<td height="5">${subsidiary.addr1}</td>
+		</tr>
+		<tr>
+		<td height="5">${subsidiary.addr2}</td>
+		</tr>
+		<tr>
+		<td height="5">${subsidiary.city} ${subsidiary.state} ${subsidiary.zip}</td>
+		</tr>
+		<tr>
+		<td height="5">&nbsp;</td>
+		</tr>
+		<tr>
+		<td>${subsidiary.country}</td>
+		</tr>
+		<tr>
+		<td height="5">&nbsp;</td>
+		</tr>
+		<tr>
+		<td style="font-size:11px;">Tax ID: ${subsidiary.federalidnumber}</td>
+		</tr>
+		<tr></tr></table>
+	</td>
+	</tr>
+	<tr>
+	<td>
+	<hr /></td>
+	<td>
+	<hr /></td>
+	</tr></table>
+        </macro>
+        <macro id="nlfooter">
+            <hr />
+<table class="footer" style="width: 100%;"><tr>
+	<td style="font-size:11px;align: left;width:30%;">E-Mail: ${subsidiary.email}</td>
+	<td style="font-size:11px;align: center;width:40%;"><#if subsidiary.phone?has_content>Tel.:&nbsp;${subsidiary.phone}&nbsp;</#if><#if subsidiary.fax?has_content>FAX:&nbsp;${subsidiary.fax}</#if></td>
+	<td style="font-size:11px;align: right;width:30%;">${record.subsidiary.url}&nbsp;&nbsp;<pagenumber/> of <totalpages/></td>
+	</tr></table>
+        </macro>
+    </macrolist>
+    <style type="text/css">* {
+				<#if .locale == "zh_CN"> font-family: stsong, sans-serif; 
+				<#elseif .locale == "zh_TW"> font-family: msung, sans-serif; 
+				<#elseif .locale == "ja_JP"> font-family: heiseimin, sans-serif; 
+				<#elseif .locale == "ko_KR"> font-family: hygothic, sans-serif; 
+				<#elseif .locale == "ru_RU"> font-family: verdana;
+				<#else> font-family: hebrew, sans-serif; 
+				</#if> 
+				}
+			table {
+				font-size: 9pt; 
+				table-layout: fixed; 
+				border-collapse: collapse; 
+				border-spacing:0; 
+			} 
+			th {
+				font-weight: bold; 
+				font-size: 8pt; 
+				align: center;
+				padding: 5px 6px 3px; 
+				/*color: #24b00e;   Color for the header*/
+			} 
+			td { 
+				padding: 4px 6px; 
+			} 
+			b { 
+				font-weight: bold; 
+				color: #333333; 
+			} 
+			table.header td { 
+				padding: 0px; 
+				font-size: 10pt; 
+			} 
+			table.footer td { 
+				padding: 0px; 
+				font-size: 8pt; 
+			} 
+			table.itemtable th { 
+				padding-bottom: 10px; 
+				padding-top: 10px; 
+			} 
+			table.body td { 
+				padding-top: 2px; 
+			} 
+			table.total { 
+				page-break-inside: avoid; 
+			} 
+			hr { 
+				width: 100%; 
+				color: #c9c7c7; 
+				background-color: #c9c7c7; 
+				height: 1px; 
+			}
+			table.alt-lines tbody tr.odd,
+			table.alt-lines tbody tr.odd td,
+			table.alt-lines tbody tr td {
+				background-color: #ededed;
+			}
+			table.alt-lines tbody tr.even,
+			table.alt-lines tbody tr.even td,
+			table.alt-lines tbody tr:nth-of-type(even) td {
+				background-color: #f8f8f8;
+			}
+			
+			#items_table td {
+				border: 0.2px;
+			}
+			
+			.red-font{
+				color:#ff0000;
+			}
+			
+			.comp-font{
+				color:#183ead;
+				font-size:18px;
+			}
+			
+			#invoice {
+			padding:10px;
+			margin:10px;
+			font-size: 15px;
+			}
+</style>
+</head>
+<body header="nlheader" header-height="110px" footer="nlfooter" footer-height="20pt" padding="0.5in 0.5in 0.5in 0.5in" size="Letter">
+    &nbsp;
+<table style="width: 100%;"><tr>
+	<td style="width: 73%;vertical-align: top;">
+	<table><tr>
+		<td>
+		<table cellpadding="0" cellspacing="2" style="width: 100%;"><tr>
+			<td><b>${record.billaddress@label}:</b></td>
+			</tr>
+			<tr>
+			<td style="line-height:12">${record.billaddress}</td>
+			</tr>
+			<#if record.vatregnum?has_content && (subsidiary.country!='Israel'  || record.billcountry=='IL')>
+			<tr>
+			<td>${record.vatregnum}</td>
+			</tr>
+			</#if></table>
+		</td>
+		</tr></table>
+	</td>
+	<td style="width: 27%;">
+	<table style="width: 100%;"><tr>
+		<td>
+		<table style="width:100%;"><#if record.trandate?has_content><tr>
+			<td><b>${record.trandate@label}:</b> ${record.trandate?string('dd-MMM-yyyy')}</td>
+			</tr>
+			</#if><#if record.terms?has_content>
+			<tr>
+			<td><b>${record.terms@label}:</b> ${record.terms}</td>
+			</tr>
+			</#if><#if record.duedate?has_content>
+			<tr>
+			<td><b>${record.duedate@label}:</b> ${record.duedate?string('dd-MMM-yyyy')}</td>
+			</tr>
+			</#if><#if record.otherrefnum?has_content>
+			<tr>
+			<td><b>${record.otherrefnum@label}:</b>&nbsp;${record.otherrefnum}</td>
+			</tr>
+			</#if></table>
+		</td>
+		</tr></table>
+	</td>
+	</tr></table>
+<#assign Print=''><#if record.subsidiary.custrecord_ac_prnt_orgnl><#if record.custbodyoriginal_print_counter==0><#assign Print=' Draft'></#if><#if record.custbodyoriginal_print_counter==1><#assign Print=' Original'></#if><#if record.custbodyoriginal_print_counter \gte2><#assign Print=' Copy'></#if></#if><#assign Tax='Tax'><#if subsidiary.country=='Israel' && record.entity.vatregnumber==subsidiary.federalidnumber ><#assign Tax='Self'></#if><#if subsidiary.country=='Japan'><#assign Tax=''></#if><#if subsidiary.country.internalid == 'CN'><#assign Tax=''></#if>
+
+<div style="width:100%;">
+<p align="center" id="invoice">${record@title} ${record.tranid}${Print}</p>
+</div>
+
+<div width="100%"><#list record.item as item><!-- start items -->
+<table class="table alt-lines" colspan="100" id="items_table" style="width:100%; nth-child(even);"><#if item_index==0>
+<thead border="0.2">
+	<tr>
+	<th border="0.2" colspan="3">#</th>
+	<th border="0.2" colspan="11">${item.item@label}</th>
+	<th border="0.2" colspan="44">${item.description@label}</th>
+	<th border="0.2" colspan="12">${item.quantity@label}</th>
+	<th border="0.2" colspan="14">${item.rate@label}</th>
+	<th border="0.2" colspan="16">${item.amount@label} ${record.currency}</th>
+	</tr>
+</thead>
+</#if><tr class="${['odd', 'even'][item_index%2]}">
+	<td colspan="3">${item.line}</td>
+	<td align="left" colspan="11">${item.item}</td>
+	<td align="left" colspan="44">${item.Description}</td>
+	<#if item.itemtype!="Description">
+	<td align="center" colspan="12"><#if item.itemtype!="Subtotal">${item.quantity}</#if></td>
+	<td align="right" colspan="14"><#if item.itemtype!="Subtotal">${item.rate?string('#,##0.00')}</#if></td>
+	<td align="right" colspan="16">${(item.rate*item.quantity)?string('#,##0.00')}</td>
+	<#else>
+	<td colspan="42">&nbsp;</td>
+	</#if></tr></table>
+</#list><!-- end items --></div>
+<#if record.custbodysecondary_book?has_content && subsidiary.country.internalid == record.billcountry><#if record.accountingbookdetail?has_content><#list record.accountingbookdetail as bookdetail><#if bookdetail.accountingbook == record.custbodysecondary_book && record.currency != bookdetail.currency><#assign ExRate=(bookdetail.exchangerate)><#assign Cur=(bookdetail.currency)></#if></#list><#elseif record.currency != record.subsidiary.currency><#assign ExRate=(record.exchangerate)><#assign Cur=(record.subsidiary.currency)></#if></#if>
+
+<table cellpadding="0" cellspacing="0" style="margin-top:15px" width="100%"><tr>
+	<td width="66%"><#if Cur?has_content>
+	<table width="88%"><tr>
+		<td colspan="5">${Cur} ${record.exchangerate@label} ${(ExRate)?string('#,##0.00')}</td>
+		<td border="0.2" colspan="3">${Cur} ${record.subtotal@label}</td>
+		<td align="right" border="0.2" colspan="3" style="text-align: right;">${(ExRate*record.subtotal)?string('#,##0.00')}</td>
+		</tr>
+		<tr>
+		<td colspan="5">&nbsp;</td>
+		<td border="0.2" colspan="3">${Cur} ${record.taxtotal@label}</td>
+		<td align="right" border="0.2" colspan="3">${(ExRate*record.taxtotal)?string('#,##0.00')}</td>
+		</tr>
+		<tr>
+		<td colspan="5">&nbsp;</td>
+		<td border="0.2" colspan="3">${Cur} ${record.total@label}</td>
+		<td align="right" border="0.2" colspan="3">${(ExRate*record.total)?string('#,##0.00')}</td>
+		</tr></table>
+	<#else>&nbsp; </#if></td>
+	<td align="right" width="34%">
+	<table width="92%"><#if subsidiary.country=='Israel' || subsidiary.country=='United States' ><tr>
+		<td align="left" border="0.2"><b>${record.subtotal@label}</b></td>
+		<td align="right" border="0.2">${record.subtotal?string('#,##0.00')}</td>
+		</tr>
+		<tr>
+		<td align="left" border="0.2"><b>${record.taxtotal@label} (${(record.taxtotal/record.subtotal*100)?string('#,##0.00')}%)</b></td>
+		<td align="right" border="0.2">${record.taxtotal?string('#,##0.00')}</td>
+		</tr>
+		</#if>
+		<tr>
+		<td align="left" border="0.2"><b>${record.total@label}</b></td>
+		<td align="right" border="0.2">${record.currency} ${record.total?string('#,##0.00')}</td>
+		</tr></table>
+	</td>
+	</tr></table>
+
+<div style="padding-top:15px" width="75%"><#if record.message?has_content>
+<table align="left" border="0" cellpadding="1" cellspacing="1" style="padding-top:15pt"><tr>
+	<td height="15"><b>${record.message@label}</b></td>
+	</tr>
+	<tr>
+	<td>${record.message}</td>
+	</tr></table>
+</#if></div>
+
+<div style="padding-top:12pt"><#if record.custbody_ac_disclaimer?has_content>
+<table align="left" cellpadding="1" cellspacing="1" width="100%"><tr>
+	<td><b>Payment to:</b></td>
+	</tr>
+	<tr>
+	<td>${record.custbody_ac_disclaimer.custrecorddisclaimer}</td>
+	</tr></table>
+</#if></div>
+</body>
+</pdf>

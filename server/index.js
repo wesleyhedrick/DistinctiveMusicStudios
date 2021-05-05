@@ -12,6 +12,7 @@ const hostname = '127.0.0.1';
 //Register Middleware
 app.use(logger);
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(express.static('public'));
 // disabling for local development
 // app.use(helmet());
@@ -28,9 +29,11 @@ app.use(session({
 app.engine('html', es6Renderer);
 app.set('views', 'templates');
 app.set('view engine', 'html');
-const server = http.createServer(app);
+const { homeRouter, instrumentRouter } = require('./routes')
 
-app.use('/api/student', studentRouter)
+const server = http.createServer(app);
+app.use('/api/instruments', instrumentRouter)
+app.use('/api', homeRouter)
 //Error Handling for Bad Routes
 app.get('*', (req, res) => {
     res.status(404).send('<h1>Page not found</h1>');
