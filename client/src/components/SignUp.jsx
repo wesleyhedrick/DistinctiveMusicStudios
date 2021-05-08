@@ -38,12 +38,12 @@ function SignUp({ setSignUpOrIn }) {
         }
 
         const { data } = await axios.post('api/sign-up', formData)
-
         if (data == 'user exists') {
-
             setWarningPlaceHolder('This user already exists. Please pick another email.')
         }
-        return
+        setSignUpOrIn('in')
+
+        return 'success'
     }
 
     return (

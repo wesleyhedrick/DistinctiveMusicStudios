@@ -25,11 +25,12 @@ module.exports = (sequelize, DataTypes) => {
         date_hired: DataTypes.DATE,
         phone: DataTypes.STRING,
         email: { type: DataTypes.STRING, allowNull: false, unique: true },
-        hash: { type: DataTypes.STRING, allowNull: false }
+        hash: { type: DataTypes.STRING, allowNull: false },
+        permission_level: DataTypes.STRING
 
     }, {
-            sequelize,
-            modelName: 'Teacher',
-        });
+        sequelize,
+        modelName: 'Teacher',
+    });
     return Teacher;
 };
