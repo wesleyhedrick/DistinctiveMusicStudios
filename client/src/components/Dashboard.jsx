@@ -1,7 +1,11 @@
 import { useState } from 'react'
+import NewReport from './NewReport'
+import NewStudents from './NewStudents'
+import TeacherReports from './TeacherReports'
 function Dashboard() {
     const [permissionLevel, setPermissionLevel] = useState('')
     const [displayStudentsOrReports, setDisplayToStudentsOrReports] = useState('students')
+    const [newReportOrPlainLandingPage, toggleNewReportOrPlainLandingPage] = useState('plain')
 
     return (
         <>
@@ -23,14 +27,14 @@ function Dashboard() {
                         </div>
                         <div className="row d-flex justify-content-center">
                             <div className="col">
-                                <ul class="nav nav-tabs">
-                                    <li class="nav-item">
+                                <ul className="nav nav-tabs">
+                                    <li className="nav-item">
                                         <a onClick={() => setDisplayToStudentsOrReports('students')}
-                                            class="nav-link" aria-current="page">Students</a>
+                                            className="nav-link" aria-current="page">Students</a>
                                     </li>
-                                    <li class="nav-item">
+                                    <li className="nav-item">
                                         <a onClick={() => setDisplayToStudentsOrReports('reports')}
-                                            class="nav-link">Reports</a>
+                                            className="nav-link">Reports</a>
                                     </li>
                                 </ul>
                             </div>
@@ -38,13 +42,16 @@ function Dashboard() {
                         {displayStudentsOrReports === 'students' ?
                             <div className="row d-flex justify-content-center">
                                 <div className="col">
-                                    <p>Student Info</p>
+                                    <NewStudents />
                                 </div>
                             </div>
                             :
                             <div className="row d-flex justify-content-center">
                                 <div className="col">
-                                    <p>Reports</p>
+                                    {newReportOrPlainLandingPage === 'plain' ?
+                                        <TeacherReports toggleNewReportOrPlainLandingPage={toggleNewReportOrPlainLandingPage} />
+                                        :
+                                        <NewReport toggleNewReportOrPlainLandingPage={toggleNewReportOrPlainLandingPage} />}
                                 </div>
                             </div>
                         }

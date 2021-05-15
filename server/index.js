@@ -29,10 +29,11 @@ app.use(session({
 app.engine('html', es6Renderer);
 app.set('views', 'templates');
 app.set('view engine', 'html');
-const { homeRouter, instrumentRouter } = require('./routes')
+const { homeRouter, instrumentRouter, studentRouter } = require('./routes')
 
 const server = http.createServer(app);
 app.use('/api/instruments', instrumentRouter)
+app.use('/api/students/', studentRouter)
 app.use('/api', homeRouter)
 //Error Handling for Bad Routes
 app.get('*', (req, res) => {

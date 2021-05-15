@@ -40,3 +40,7 @@
 button {
     background: green;
 }
+
+a:hover {
+    cursor:pointer
+}
