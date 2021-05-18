@@ -44,3 +44,7 @@ button {
 a:hover {
     cursor:pointer
 }
+
+.teacher-dashboard {
+    max-width: 800px
+}

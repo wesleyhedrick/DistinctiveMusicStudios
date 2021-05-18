@@ -1,6 +1,9 @@
-function TimeSelect() {
+function TimeSelect({ time }) {
+
+    const [lessonTime, setLessonTime] = [time]
+
     return (
-        <select>
+        <select defaultValue={lessonTime}>
             <option value="0">12:00 a.m.</option>
             <option value="30">12:30 a.m.</option>
             <option value="100">1:00 a.m.</option>
@@ -49,7 +52,6 @@ function TimeSelect() {
             <option value="2230">10:30 p.m.</option>
             <option value="2300">11:00 p.m.</option>
             <option value="2330">11:30 p.m.</option>
-
         </select>
     )
 

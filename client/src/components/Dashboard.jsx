@@ -9,6 +9,7 @@ function Dashboard() {
 
     return (
         <>
+            {/* if user is admin (nathan) show admin dashboard */}
             {
                 permissionLevel === 'admin' ?
                     < div className="container w-50 border border-danger" >
@@ -19,15 +20,19 @@ function Dashboard() {
                         </div>
                     </div >
                     :
-                    < div className="container w-50 border border-danger" >
+                    // if permission level not admin, show teacher dashboard
+                    < div className="container  border border-danger teacher-dashboard" >
                         <div className="row d-flex justify-content-center">
                             <div className="col">
                                 <h1>Hello, teacher</h1>
                             </div>
                         </div>
+                        {/* Nav section */}
                         <div className="row d-flex justify-content-center">
                             <div className="col">
                                 <ul className="nav nav-tabs">
+
+                                    {/* Students and Reports Tabs */}
                                     <li className="nav-item">
                                         <a onClick={() => setDisplayToStudentsOrReports('students')}
                                             className="nav-link" aria-current="page">Students</a>
@@ -39,6 +44,8 @@ function Dashboard() {
                                 </ul>
                             </div>
                         </div>
+
+                        {/* Show student subdashboard or reports subdashboard */}
                         {displayStudentsOrReports === 'students' ?
                             <div className="row d-flex justify-content-center">
                                 <div className="col">

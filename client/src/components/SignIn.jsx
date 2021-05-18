@@ -69,7 +69,7 @@ function SignIn({ setSignUpOrIn, warningBorderEmail, warningBorderPassword,
                         <input
                             className={`form-control mb-3 ${warningBorderPassword}`}
                             type="password"
-                            name="password" www
+                            name="password"
                             id="password"
                             placeholder={`Keep it secret. Keep it safe.`} />
                         <input className={`w-50 align-self-center`} type="submit" value="Sign In" />

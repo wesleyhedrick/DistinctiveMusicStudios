@@ -37,6 +37,7 @@ const sendCurrentStudents = async (req, res) => {
 }
 
 const sendCurrentReportData = async (req, res) => {
+    // const teacherId = req.session.id
     const data = await Student.findAll({
         attributes: ['first', 'last', 'lesson_day', 'lesson_time', 'lesson_length'],
         // where: {
@@ -44,38 +45,34 @@ const sendCurrentReportData = async (req, res) => {
         // },
         order: [['lesson_day', 'DESC']]
     })
-    const days = { Monday: [], Tuesday: [], Wednesday: [], Thursday: [], Friday: [] };
+    const reportData = { Monday: [], Tuesday: [], Wednesday: [], Thursday: [], Friday: [] };
 
     data.forEach(item => {
         if (item.lesson_day == 1) {
-            days.Monday.push(item)
+            reportData.Monday.push(item)
         }
         if (item.lesson_day == 2) {
-            days.Tuesday.push(item)
+            reportData.Tuesday.push(item)
         }
         if (item.lesson_day == 3) {
-            days.Wednesday.push(item)
+            reportData.Wednesday.push(item)
         }
         if (item.lesson_day == 4) {
-            days.Thursday.push(item)
+            reportData.Thursday.push(item)
         }
         if (item.lesson_day == 5) {
-            days.Friday.push(item)
+            reportData.Friday.push(item)
         }
-
 
     })
 
-    for (k in days) {
-        if (days[k] == false) {
-            delete days[k]
+    for (k in reportData) {
+        if (reportData[k] == false) {
+            delete reportData[k]
         }
     }
 
-    const setOfDays = new Set();
-    data.forEach(item => setOfDays.add(item.lesson_day))
-
-    res.json(days)
+    res.json(reportData)
 
 }
 

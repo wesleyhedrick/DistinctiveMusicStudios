@@ -6,5 +6,4 @@ const { studentController } = require('../controllers')
 router.get('/current-report', studentController.sendCurrentReportData)
 
 
-
 module.exports = router

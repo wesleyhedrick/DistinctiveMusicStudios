@@ -1,67 +1,31 @@
 import { useState } from 'react'
 import TimeSelect from './TimeSelect'
-function DayCardForTeacherReport({ dayOfWeek, students }) {
+function DayCardForTeacherReport({ dayOfWeek, studentBlob }) {
 
-    const [studentObjectArrayState, setStudentObjectArrayState] = useState([
-        {
-            name: 'Sally Jane',
-            timeFrame: '45',
-            timeSlot: '2:00 pm'
-        },
-        {
-            name: 'Wanda Maximoff',
-            timeFrame: '45',
-            timeSlot: '3:00 pm'
-        },
-        {
-            name: 'Steve Rogers',
-            timeFrame: '45',
-            timeSlot: '10:00 am'
-        },
-        {
-            name: 'Anthony Stark',
-            timeFrame: '45',
-            timeSlot: '11:00 am'
-        }
-    ])
+    const [todaysStudentBlob, setTodaysStudentBlob] = useState(studentBlob)
 
     function addStudent() {
-        let newArray = [...studentObjectArrayState, { name: '', timeFrame: '', timeSlot: '' }]
-        console.log('adding a student')
-        setStudentObjectArrayState(newArray)
+        let newBlob = [...todaysStudentBlob, { first: '', last: '', timeFrame: '', timeSlot: '' }]
+        setTodaysStudentBlob(newBlob)
     }
 
-    function removeStudent() {
-        console.log('removing a student')
-        let newArray = [...studentObjectArrayState]
-        newArray.pop()
-        setStudentObjectArrayState(newArray)
+    function removeStudent(index) {
+        console.log('line 13', index)
+        console.log('todaysStudent', todaysStudentBlob)
+
+        let newBlob = [...todaysStudentBlob].filter((item, idx) =>
+            idx != index
+        )
+        console.log('newBlob', newBlob)
+        // setTodaysStudentBlob(newBlob)
+
     }
 
-
-    // const studentObjectArray = [
-    //     {
-    //         name: 'Sally Jane',
-    //         timeFrame: '45',
-    //         timeSlot: '2:00 pm'
-    //     },
-    //     {
-    //         name: 'Wanda Maximoff',
-    //         timeFrame: '45',
-    //         timeSlot: '3:00 pm'
-    //     },
-    //     {
-    //         name: 'Steve Rogers',
-    //         timeFrame: '45',
-    //         timeSlot: '10:00 am'
-    //     },
-    //     {
-    //         name: 'Anthony Stark',
-    //         timeFrame: '45',
-    //         timeSlot: '11:00 am'
-    //     },
-    // ]
-
+    function popStudent() {
+        let newBlob = [...todaysStudentBlob]
+        newBlob.pop()
+        setTodaysStudentBlob(newBlob)
+    }
 
     return (
         <div className="container border border-3 border-danger my-3 py-3">
@@ -71,32 +35,34 @@ function DayCardForTeacherReport({ dayOfWeek, students }) {
                 </div>
             </div>
             {
-                studentObjectArrayState.map((student, idx) =>
-                    <div key={idx} className="row d-flex border border-2 border-info">
-                        <div className="col border border-warning">
-                            <input type="text" name="name" id="" defaultValue={student.name} />
+                todaysStudentBlob.map((student, idx) =>
+                    <div key={idx} className="row d-flex align-items-center border border-2 border-info">
+                        <div className="col-sm-4">
+                            <input className="w-100" type="text" name="name" id="" defaultValue={`${student.first} ${student.last}`} />
                         </div>
-                        <div className="col border border-warning">
-                            <input type="text" className="time-frame" name="time-frame" id="" defaultValue={`${student.timeFrame}`} />
+                        <div className="col-sm-2">
+                            <input type="text" className="time-frame w-100" name="time-frame" id="" defaultValue={student.lesson_length} />
                         </div>
-                        <div className="col border border-warning">
-                            <p>min</p>
+                        <div className="col-sm-1">
+                            <p className="w-100">min</p>
                         </div>
-                        <div className="col border border-warning">
-                            <TimeSelect />
+                        <div className="col-sm-2">
+                            <TimeSelect time={student.lesson_time} />
                         </div>
-                        <div className="col border border-warning">
-                            <input onClick={() => console.log('You want to remove a student?')} type="button" defaultValue="Remove" />
+                        <div className="col-sm-3 d-flex justify-content-end">
+                            <input onClick={() => { removeStudent(idx); console.log('removing student') }} type="button" defaultValue="Remove" />
                         </div>
                     </div>
                 )
             }
+
+            {/* buttons for adding and removing students */}
             <div className="row d-flex justify-content-start border border-2 border-info">
                 <div className="col-sm-auto border ">
                     <input onClick={addStudent} type="button" value="Add Student" />
                 </div>
                 <div className="col-sm-auto border">
-                    <input onClick={removeStudent} type="button" value="Remove Student" />
+                    <input onClick={popStudent} type="button" value="Remove Student" />
                 </div>
             </div>
         </div >
