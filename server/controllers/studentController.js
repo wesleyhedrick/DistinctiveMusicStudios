@@ -35,11 +35,14 @@ const sendCurrentStudents = async (req, res) => {
 
     res.json(data)
 }
-
+const processCurrentReportData = async (req, res) => {
+    console.log(`processCurrentReportData is running`)
+    console.log(req.body)
+}
 const sendCurrentReportData = async (req, res) => {
     // const teacherId = req.session.id
     const data = await Student.findAll({
-        attributes: ['first', 'last', 'lesson_day', 'lesson_time', 'lesson_length'],
+        attributes: ['id', 'first', 'last', 'lesson_day', 'lesson_time', 'lesson_length'],
         // where: {
         //     lesson_day: 3
         // },
@@ -80,6 +83,7 @@ module.exports = {
     sendPendingStudentDetail,
     sendPendingStudentSummary,
     sendCurrentStudents,
-    sendCurrentReportData
+    sendCurrentReportData,
+    processCurrentReportData
 };
 

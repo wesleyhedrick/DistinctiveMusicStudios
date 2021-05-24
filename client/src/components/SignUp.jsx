@@ -4,7 +4,7 @@ import Instrument from './Instrument';
 
 function SignUp({ setSignUpOrIn }) {
     const [instruments, setInstruments] = useState([])
-    const [warningPlaceHolder, setWarningPlaceHolder] = useState('jbach@gmail.com')
+    const [warningPlaceHolder, setWarningPlaceHolder] = useState('')
 
     //get all instruments from db
     useEffect(async () => {

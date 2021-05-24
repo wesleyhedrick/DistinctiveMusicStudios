@@ -1,9 +1,9 @@
-function TimeSelect({ time }) {
+function TimeSelect({ time, updateObject, idx }) {
 
     const [lessonTime, setLessonTime] = [time]
 
     return (
-        <select defaultValue={lessonTime}>
+        <select data-index={idx} onChange={(e) => updateObject(e)} defaultValue={lessonTime} name={`lesson_time`}>
             <option value="0">12:00 a.m.</option>
             <option value="30">12:30 a.m.</option>
             <option value="100">1:00 a.m.</option>
