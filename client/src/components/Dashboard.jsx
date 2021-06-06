@@ -1,15 +1,16 @@
 import { useState } from 'react'
+import NavBar from './NavBar'
 import NewReport from './NewReport'
 import NewStudents from './NewStudents'
 import TeacherReports from './TeacherReports'
 function Dashboard() {
     const [permissionLevel, setPermissionLevel] = useState('')
-    const [displayStudentsOrReports, setDisplayToStudentsOrReports] = useState('students')
-    const [newReportOrPlainLandingPage, toggleNewReportOrPlainLandingPage] = useState('plain')
+    const [displayNewStudentsOrReports, setDisplayToNewStudentsOrReports] = useState('students')
+    const [newOrHistoricalReports, toggleNewOrHistoricalReports] = useState('plain')
 
     return (
         <>
-            {/* if user is admin (nathan) show admin dashboard */}
+            {/* if user is admin (nathan) show admin dashboard, else show teacher dashboard*/}
             {
                 permissionLevel === 'admin' ?
                     < div className="container w-50 border border-danger" >
@@ -21,32 +22,13 @@ function Dashboard() {
                     </div >
                     :
                     // if permission level not admin, show teacher dashboard
-                    < div className="container  border border-danger teacher-dashboard" >
-                        <div className="row d-flex justify-content-center">
-                            <div className="col">
-                                <h1>Hello, teacher</h1>
-                            </div>
-                        </div>
-                        {/* Nav section */}
-                        <div className="row d-flex justify-content-center">
-                            <div className="col">
-                                <ul className="nav nav-tabs">
+                    < div className="container teacher-dashboard" >
 
-                                    {/* Students and Reports Tabs */}
-                                    <li className="nav-item">
-                                        <a onClick={() => setDisplayToStudentsOrReports('students')}
-                                            className="nav-link" aria-current="page">Students</a>
-                                    </li>
-                                    <li className="nav-item">
-                                        <a onClick={() => setDisplayToStudentsOrReports('reports')}
-                                            className="nav-link">Reports</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                        {/* Nav section */}
+                        <NavBar setDisplayToNewStudentsOrReports={setDisplayToNewStudentsOrReports} />
 
                         {/* Show student subdashboard or reports subdashboard */}
-                        {displayStudentsOrReports === 'students' ?
+                        {displayNewStudentsOrReports === 'students' ?
                             <div className="row d-flex justify-content-center">
                                 <div className="col">
                                     <NewStudents />
@@ -55,20 +37,14 @@ function Dashboard() {
                             :
                             <div className="row d-flex justify-content-center">
                                 <div className="col">
-                                    {newReportOrPlainLandingPage === 'plain' ?
-                                        <TeacherReports toggleNewReportOrPlainLandingPage={toggleNewReportOrPlainLandingPage} />
+                                    {newOrHistoricalReports === 'plain' ?
+                                        <TeacherReports toggleNewOrHistoricalReports={toggleNewOrHistoricalReports} />
                                         :
-                                        <NewReport toggleNewReportOrPlainLandingPage={toggleNewReportOrPlainLandingPage} />}
+                                        <NewReport toggleNewOrHistoricalReports={toggleNewOrHistoricalReports} />}
                                 </div>
                             </div>
                         }
-                        <div className="container">
-                            <div className="row">
-                                <div className="col">
-                                    <button>Log out</button>
-                                </div>
-                            </div>
-                        </div>
+
                     </div >
             }
 

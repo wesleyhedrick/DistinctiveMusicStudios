@@ -47,48 +47,53 @@ function SignUp({ setSignUpOrIn }) {
     }
 
     return (
-        <>
-            <div className="container d-flex flex-column justify-content-center border">
-                <div className="row">
-                    <div className="col">
-                        <form className="bg-light pb-5" action="" onSubmit={signUpTeacher}>
+        <div className="container-fluid min-vh-100 d-flex flex-column justify-content-center landing-background">
+            <div className="row justify-content-center"  >
+                <div className="col-md-6 form-box">
+                    <form className="bg-0 p-3 d-flex flex-column" action="" onSubmit={signUpTeacher}>
 
-                            <h2 className="p-3 mt-3">Personal Information</h2>
-                            <div className="container">
-                                <label className="form-label" htmlFor="first">First Name</label>
+                        <h2 className="mt-3 text-black-50">Personal Information</h2>
+                        <div className="name-container d-flex">
+                            <div className="first-name-container flex-grow-1">
+                                <label className="form-label text-black-50" htmlFor="first">First Name</label>
                                 <input className="form-control mb-3" type="text" name="first" id="first" placeholder="Johann" />
-
-                                <label className="form-label" htmlFor="last">Last Name</label>
-                                <input className="form-control mb-3" type="text" name="last" id="last" placeholder="Bach" />
-
-                                <label className={`form-label`} htmlFor="email">Email</label>
-                                <input className={`form-control mb-3 `} type="text" name="email" id="email" value={`${warningPlaceHolder}`} placeholder="jbach@gmail.com" />
-
-                                <label className="form-label" htmlFor="password">Password</label>
-                                <input className="form-control mb-3" type="text" name="password" id="password" placeholder="something tricky" />
-
-                                <label className="form-label" htmlFor="phone">Phone</label>
-                                <input className="form-control mb-3" type="text" name="phone" id="phone" placeholder="555-555-5555" />
-
                             </div>
-                            <h2 className="p-3">Instruments</h2>
+                            <div className="last-name-container flex-grow-1">
+                                <label className="form-label text-black-50" htmlFor="last">Last Name</label>
+                                <input className="form-control mb-3" type="text" name="last" id="last" placeholder="Bach" />
+                            </div>
 
+                        </div>
+
+                        <label className={`form-label text-black-50`} htmlFor="email">Email</label>
+                        <input className={`form-control mb-3 `} type="text" name="email" id="email" value={`${warningPlaceHolder}`} placeholder="jbach@gmail.com" />
+
+                        <label className="form-label text-black-50" htmlFor="password">Password</label>
+                        <input className="form-control mb-3" type="text" name="password" id="password" placeholder="something tricky" />
+
+                        <label className="form-label text-black-50" htmlFor="phone">Phone</label>
+                        <input className="form-control mb-3" type="text" name="phone" id="phone" placeholder="555-555-5555" />
+
+
+                        <h2 className="pt-3 text-black-50">Instruments</h2>
+                        <div className="d-flex w-100 border flex-wrap" >
                             <Instrument selectNumber={1} instruments={instruments} />
                             <Instrument selectNumber={2} instruments={instruments} />
                             <Instrument selectNumber={3} instruments={instruments} />
                             <Instrument selectNumber={4} instruments={instruments} />
                             <Instrument selectNumber={5} instruments={instruments} />
 
-                            <div className="container">
-                                <input className="btn btn-primary mt-5" type="submit" value="Create Account" />
+                        </div>
 
-                            </div>
+                        <input className="btn btn-primary mt-5 custom-btn text-black-50 border-0 align-self-center" type="submit" value="Create Account" />
 
-                        </form>
-                    </div>
+
+
+                    </form>
                 </div>
             </div>
-        </>
+        </div>
+
     )
 }
 

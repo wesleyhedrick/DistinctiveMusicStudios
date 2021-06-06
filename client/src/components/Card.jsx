@@ -1,4 +1,4 @@
-function NewStudents() {
+function Card() {
     const studentArray = ['Sally Jane', 'Wanda Maximoff', 'Steve Rogers', 'Vis Ion', 'Anthony Stark']
     return (
         <div className="card bg-warning p-2 my-3 w-50 student-card shadow">
@@ -14,4 +14,4 @@ function NewStudents() {
     )
 }
 
-export default NewStudents
+export default Card

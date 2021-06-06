@@ -1,3 +1,12 @@
+:root {
+    --blue: #1be7ff;
+    --green: #6EEB83;
+    --yellow: #E4FF1A;
+    --orange: #FFB800;
+    --red: #FF5714;
+    --credBtnNormal: 3rem;
+}
+
 .App {
   text-align: center;
 }
@@ -47,4 +56,56 @@ a:hover {
 
 .teacher-dashboard {
     max-width: 800px
+}
+
+.landing-background{
+    background: linear-gradient(to bottom, var(--blue), var(--green))
+}
+
+.form-box {
+    background: linear-gradient(to bottom, var(--green), var(--blue))
+}
+
+.custom-btn {
+    height: var(--credBtnNormal);
+    background: var(--yellow);
+    width: 75%;
+}
+
+.student-card {
+    background: linear-gradient(to right, var(--green), var(--blue));
+}
+
+.primary-navbar {
+    background: linear-gradient(to right, var(--blue), var(--green));
+}
+
+.secondary-navbar {
+    border-bottom: 2px solid var(--green)
+}
+
+
+.logout-btn, .new-report-btn, .report-submit-btn {
+    background: var(--green);
+    border: none;
+    padding: 1rem;
+}
+
+
+
+@media only screen and (max-width: 450px){
+    .form-box {
+        background: transparent;
+        border: 0 solid transparent!important;
+        box-shadow: 0 0 0 0!important;
+    }
+    
+    .custom-btn {
+        height: 2.2rem;
+        background: var(--yellow);
+        width: 100%!important
+    }
+
+
+
 }

@@ -1,13 +1,15 @@
-function TeacherReports({ toggleNewReportOrPlainLandingPage }) {
+import HistoricalReportsLinks from './HistoricalReportsLinks'
+import SecondaryNavBar from './SecondaryNavBar'
+function TeacherReports({ toggleNewOrHistoricalReports }) {
     const pastReports = Array.from({ length: 5 }, (_, i) => i)
     return (
         <>
             <div className="container">
                 <div className="row">
-                    <div className="col">{pastReports.map((report, idx) => <p key={idx}>report {idx + 1}</p>)}</div>
-                    <div className="col">
-                        <button className="cursor-pointer" onClick={() => toggleNewReportOrPlainLandingPage('new-report')}>Submit New Report</button>
-                    </div>
+                    <SecondaryNavBar toggleNewOrHistoricalReports={toggleNewOrHistoricalReports} />
+                </div>
+                <div className="row justify-content-center">
+                    <HistoricalReportsLinks />
                 </div>
             </div>
         </>

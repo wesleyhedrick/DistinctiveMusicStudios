@@ -38,7 +38,39 @@ const sendCurrentStudents = async (req, res) => {
 const processCurrentReportData = async (req, res) => {
     console.log(`processCurrentReportData is running`)
     console.log(req.body)
+    const lessonDays = Object.keys(req.body)
+
+    //Nested loop below! :( I know! The arrays aren't that big.
+    //loop through all days in the req.body
+    //for each day's data, update the database
+    //If the id is 1000, this student was added on the teacher form only and is not yet
+    //fully in the student db. 
+    //ELSE update first, last, lesson_time, lesson_day based on student.id
+    lessonDays.forEach(day => {
+        req.body[day].forEach(async (student) => {
+            if (student.id == 1000) {
+                //If student was added, they will be added to db
+                console.log('student was added. Not doing anything with him yet')
+            } else if (student.id) {
+                await Student.update({
+                    first: student.first,
+                    last: student.last,
+                    lesson_time: student.lesson_time,
+                    lesson_day: student.lesson_day
+                },
+                    {
+                        where: {
+                            id: student.id
+                        }
+                    }
+                )
+            }
+        })
+    })
+
 }
+
+
 const sendCurrentReportData = async (req, res) => {
     // const teacherId = req.session.id
     const data = await Student.findAll({

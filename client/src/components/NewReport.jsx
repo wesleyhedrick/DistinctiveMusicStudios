@@ -1,9 +1,11 @@
 import DayCardForTeacherReport from "./DayCardForTeacherReport"
 import axios from 'axios'
 import { useState, useEffect } from 'react'
+import SecondaryNavBar from "./SecondaryNavBar"
 
-function NewReport({ toggleNewReportOrPlainLandingPage }) {
-    const [reportBlob, setReportBlob] = useState({})
+function NewReport({ toggleNewOrHistoricalReports }) {
+    const [formDataFromDb, setFormDataFromDB] = useState({})
+    const [formDataToDB, setFormDataToDB] = useState({})
 
     //get data. Query will select first, last, lesson_day, lesson_time, lesson_length from "Students" where teacher == session id. 
     //Make an array of all the lesson_day in the object.
@@ -12,46 +14,34 @@ function NewReport({ toggleNewReportOrPlainLandingPage }) {
     //const daysArray = Array.from(mySet)
 
 
-    useEffect(async (myData) => {
+    useEffect(async () => {
         const { data } = await axios.get('/api/students/current-report');
-        setReportBlob(data)
+        setFormDataFromDB(data)
+        console.log('formDataFromDb', formDataFromDb)
     }, [])
 
-    console.log('reportBlob', reportBlob)
 
     async function handleFormSubmit(e) {
-        console.log('handleFormSubmit ran')
         e.preventDefault();
-        // console.log('elements', e.target.elements)
-        const elements = e.target.elements
-        const { name__1 } = e.target.elements
-        console.log('name', name__1.value)
-
-        const formKeys = Object.keys(elements)
-
-
-        const blahBlah = formKeys.filter(item => !parseInt(item) && item != 0)
-        console.log('blahBlah', blahBlah)
-        console.log(e.target.elements[blahBlah[0]].value)
-
-
-
-        // await axios.post('api/students/current-report', lesson_time__1.value)
+        await axios.post('api/students/current-report', formDataToDB)
     }
 
-
-    const daysOfWeek = Object.keys(reportBlob)
+    const daysOfWeek = Object.keys(formDataFromDb)
     console.log('object keys', daysOfWeek)
 
     return (
         <>
-            <button onClick={() => toggleNewReportOrPlainLandingPage('plain')}>View Report History</button>
+            <SecondaryNavBar toggleNewOrHistoricalReports={toggleNewOrHistoricalReports} />
             <form action="POST" onSubmit={handleFormSubmit}>
                 {daysOfWeek.map((dayOfWeek, idx) => <DayCardForTeacherReport key={idx} dayOfWeek={dayOfWeek}
-                    studentBlob={reportBlob[dayOfWeek]}
-                    reportBlob={reportBlob}
-                    setReportBlob={setReportBlob} />)}
-                <input type="submit" value="Submit Report" />
+                    formDataPerCard={formDataFromDb[dayOfWeek]}
+                    formDataToDB={formDataToDB}
+                    setFormDataToDB={setFormDataToDB} />)}
+                <div className="container">
+                    <div className="row justify-content-center">
+                        <input className="report-submit-btn w-50" type="submit" value="Submit Report" />
+                    </div>
+                </div>
             </form>
         </>
     )
