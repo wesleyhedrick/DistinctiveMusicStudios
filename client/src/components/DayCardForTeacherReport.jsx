@@ -88,6 +88,8 @@ function DayCardForTeacherReport({ dayOfWeek, formDataPerCard, formDataToDB }) {
     }
 
     return (
+
+
         <div className="container border border-3 border-info my-3 py-3">
             <div className="row">
                 <div className="col">

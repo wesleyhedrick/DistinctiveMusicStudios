@@ -33,10 +33,12 @@ function NewReport({ toggleNewOrHistoricalReports }) {
         <>
             <SecondaryNavBar toggleNewOrHistoricalReports={toggleNewOrHistoricalReports} />
             <form action="POST" onSubmit={handleFormSubmit}>
-                {daysOfWeek.map((dayOfWeek, idx) => <DayCardForTeacherReport key={idx} dayOfWeek={dayOfWeek}
-                    formDataPerCard={formDataFromDb[dayOfWeek]}
-                    formDataToDB={formDataToDB}
-                    setFormDataToDB={setFormDataToDB} />)}
+                {daysOfWeek.map((dayOfWeek, idx) =>
+
+                    <DayCardForTeacherReport key={idx} dayOfWeek={dayOfWeek}
+                        formDataPerCard={formDataFromDb[dayOfWeek]}
+                        formDataToDB={formDataToDB}
+                        setFormDataToDB={setFormDataToDB} />)}
                 <div className="container">
                     <div className="row justify-content-center">
                         <input className="report-submit-btn w-50" type="submit" value="Submit Report" />
