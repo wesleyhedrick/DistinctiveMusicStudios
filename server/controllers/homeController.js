@@ -23,6 +23,7 @@ const signIn = async (req, res) => {
         }
     })
 
+
     if (teacher) {
 
         //Compare req.body.password with teacher.hash
@@ -31,10 +32,11 @@ const signIn = async (req, res) => {
         //If password matches with hash
         if (isValid) {
             req.session.teacher_id = teacher.id;
-            let id = teacher.id
-            let first = teacher.first
+            const id = teacher.id
+            const first = teacher.first
+            const permissionLevel = teacher.permission_level
             //CHANGE LINE BELOW TO A REACT ROUTE
-            res.json({ status: 'success', id, first })
+            res.json({ status: 'success', id, first, permissionLevel })
         } else {
             res.send({ status: 'no password' })
         }

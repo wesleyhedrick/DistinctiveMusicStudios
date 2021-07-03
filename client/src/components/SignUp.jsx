@@ -4,7 +4,7 @@ import Instrument from './Instrument';
 
 function SignUp({ setSignUpOrIn }) {
     const [instruments, setInstruments] = useState([])
-    const [warningPlaceHolder, setWarningPlaceHolder] = useState('')
+    const [emailPlaceHolder, setEmailPlaceholder] = useState('')
 
     //get all instruments from db
     useEffect(async () => {
@@ -13,6 +13,9 @@ function SignUp({ setSignUpOrIn }) {
         setInstruments(data)
     }, [])
 
+    function handleChangeOnEmailField(e) {
+        setEmailPlaceholder(e.target.value)
+    }
     //when form is submitted, send teacher data to db
     async function signUpTeacher(e) {
         e.preventDefault();
@@ -34,12 +37,11 @@ function SignUp({ setSignUpOrIn }) {
             instrument_3: instrument_3.value,
             instrument_4: instrument_4.value,
             instrument_5: instrument_5.value,
-
         }
 
         const { data } = await axios.post('api/sign-up', formData)
         if (data == 'user exists') {
-            setWarningPlaceHolder('This user already exists. Please pick another email.')
+            setEmailPlaceholder('This user already exists. Please pick another email.')
         }
         setSignUpOrIn('in')
 
@@ -66,7 +68,11 @@ function SignUp({ setSignUpOrIn }) {
                         </div>
 
                         <label className={`form-label text-black-50`} htmlFor="email">Email</label>
-                        <input className={`form-control mb-3 `} type="text" name="email" id="email" value={`${warningPlaceHolder}`} placeholder="jbach@gmail.com" />
+                        <input className={`form-control mb-3 `} type="text" name="email"
+                            id="email" value={`${emailPlaceHolder}`}
+                            placeholder="jbach@gmail.com"
+                            onChange={handleChangeOnEmailField}
+                        />
 
                         <label className="form-label text-black-50" htmlFor="password">Password</label>
                         <input className="form-control mb-3" type="text" name="password" id="password" placeholder="something tricky" />
@@ -77,11 +83,11 @@ function SignUp({ setSignUpOrIn }) {
 
                         <h2 className="pt-3 text-black-50">Instruments</h2>
                         <div className="d-flex w-100 border flex-wrap" >
-                            <Instrument selectNumber={1} instruments={instruments} />
-                            <Instrument selectNumber={2} instruments={instruments} />
-                            <Instrument selectNumber={3} instruments={instruments} />
-                            <Instrument selectNumber={4} instruments={instruments} />
-                            <Instrument selectNumber={5} instruments={instruments} />
+                            <Instrument instrumentNumber={1} instruments={instruments} />
+                            <Instrument instrumentNumber={2} instruments={instruments} />
+                            <Instrument instrumentNumber={3} instruments={instruments} />
+                            <Instrument instrumentNumber={4} instruments={instruments} />
+                            <Instrument instrumentNumber={5} instruments={instruments} />
 
                         </div>
 

@@ -22,7 +22,7 @@ function DayCardForTeacherReport({ dayOfWeek, formDataPerCard, formDataToDB }) {
 
     useEffect(() => {
         formDataToDB[dayOfWeek] = []
-        //push empty object to the formDataToDB per length of formDataPerThisCar
+        //push empty object to the formDataToDB per length of formDataPerThisCard
         for (let i = 0; i < formDataForThisCard.length; i++) {
             formDataToDB[dayOfWeek].push({})
         }

@@ -31,7 +31,6 @@ function NewReport({ toggleNewOrHistoricalReports }) {
 
     return (
         <>
-            <SecondaryNavBar toggleNewOrHistoricalReports={toggleNewOrHistoricalReports} />
             <form action="POST" onSubmit={handleFormSubmit}>
                 {daysOfWeek.map((dayOfWeek, idx) =>
 

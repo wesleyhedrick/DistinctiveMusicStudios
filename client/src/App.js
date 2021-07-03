@@ -6,7 +6,7 @@ import {
     Route
 } from 'react-router-dom';
 import Credentials from './components/Credentials';
-import Dashboard from './components/Dashboard';
+import MainDashboard from './components/MainDashboard';
 
 
 function App() {
@@ -16,11 +16,12 @@ function App() {
                 <Route exact path="/">
                     <Credentials />
                 </Route>
-
-                <Route exact path="/dashboard">
-                    <Dashboard />
+                <Route exact path="/dashboard/teacher">
+                    <MainDashboard />
                 </Route>
-
+                <Route exact path="/dashboard/admin">
+                    <MainDashboard permissionLevel={'admin'} />
+                </Route>
             </Router>
         </>
     );

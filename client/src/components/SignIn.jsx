@@ -35,17 +35,19 @@ function SignIn({ setSignUpOrIn, warningBorderEmail, warningBorderPassword,
             setWarningBorderPassword('border border-3 border-danger')
             setPasswordVerified(false)
         }
-        //If success...
-        if (data.status === 'success') {
-            history.push('/dashboard')
+        //If the first two ifs above fail, the user exists in the db and a 
+        //permissionLevel key will come back. It's value will be admin or teacher
+        //route the user to the appropriate page: admin for admin, teacher for teacher
+        if (data.permissionLevel) {
+            history.push(`/dashboard/${data.permissionLevel}`)
         }
+
     }
 
     return (
         <div className="container-fluid min-vh-100 d-flex flex-column justify-content-center landing-background ">
             <div className="row d-flex justify-content-center">
                 <div className="form-box col-sm-6 p-5 shadow">
-
                     <form className={`d-flex flex-column`} onSubmit={sendSignInCreds} action="">
                         {/* Show 'Email' label. If email verification fails, show alternate label. */}
                         {emailVerified ? <label className={`form-label text-black-50`} htmlFor="email">Email</label>

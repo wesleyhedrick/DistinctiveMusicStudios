@@ -1,24 +1,24 @@
-function NavBar({ setDisplayToNewStudentsOrReports }) {
+function NavBar({ changeDisplay, entity, controlsArray }) {
 
     return (
-        <nav class="navbar navbar-expand-lg navbar-light primary-navbar">
-            <div class="container-fluid">
-                <h2>Hello, teacher</h2>
+        <nav className="navbar navbar-expand-lg navbar-light primary-navbar">
+            <div className="container-fluid ">
+                <h2>Hello, {entity} </h2>
+                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
+                </button>
                 <ul className="navbar-nav">
-                    <li className="nav-item">
-                        <a onClick={() => setDisplayToNewStudentsOrReports('students')}
-                            className="nav-link" aria-current="page">Students</a>
-                    </li>
-                    <li className="nav-item">
-                        <a onClick={() => setDisplayToNewStudentsOrReports('reports')}
-                            className="nav-link">Reports</a>
-                    </li>
-                    <li className="nav-item">
-                        <a onClick={() => setDisplayToNewStudentsOrReports('reports')}
-                            className="nav-link">Logout</a>
-                    </li>
+                    {/* Build navbar with either admin or teacher controls */}
+                    {controlsArray.map(control =>
+                        <li className="nav-item">
+                            <a onClick={() => changeDisplay(control.toLowerCase())}
+                                className="nav-link" aria-current="page">{control}</a>
+                        </li>
+                    )}
                 </ul>
             </div>
+
+
         </nav>
     )
 }
