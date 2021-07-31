@@ -9,11 +9,8 @@ import StudentEnrollmentCard from './StudentEnrollmentCard'
 function CreateNewAccount() {
     const [instruments, setInstruments] = useState([])
     const [teachers, setTeachers] = useState([])
-    const [formData, editFormData] = useState({
-        first: '', last: '', age: '', email: '', phone: '',
-        instrument_1: '', instrument_2: '', instrument_3: '',
-        teacher: '', first_lesson: '', lesson_location: ''
-    })
+    const [formData, editFormData] = useState({})
+
     const [numberOfStudents, setNumberOfStudents] = useState(1)
 
     //get a default location from the enums to be used on the location dropdown
@@ -28,17 +25,16 @@ function CreateNewAccount() {
     //blank when sent to the backend. 
     useEffect(async () => {
         let { data: { teacherNames, instruments } } = await axios.get('/api/teachers/names-and-instruments')
-        console.log('instrument array', teacherNames)
+
         setInstruments(instruments)
         setTeachers(teacherNames)
+
         const [{ id, first, last }] = teacherNames
-        console.log('teacherNames', teacherNames)
+
         editFormData({
             ...formData,
             teacher: id,
-            instrument_1: 1,
-            instrument_2: 1,
-            instrument_3: 1,
+            student1_instrument_1: 1,
             lesson_location: 1
         })
     }, [])
@@ -48,6 +44,8 @@ function CreateNewAccount() {
         console.log('name', name, 'value', value)
 
         editFormData({ ...formData, [name]: value })
+
+        console.log(formData)
     }
 
     //When form is submitted, send formData object
@@ -67,22 +65,22 @@ function CreateNewAccount() {
                         <h2 className="mt-3 text-black-50">Personal Information</h2>
                         <div className="name-container d-flex">
                             <div className="first-name-container flex-grow-1">
-                                <label className="form-label text-black-50" htmlFor="first">First Name</label>
-                                <input className="form-control mb-3" type="text" name="first" id="first" placeholder="Johann" onChange={handleFormChange} />
+                                <label className="form-label text-black-50" htmlFor="accountholder_firstname">First Name</label>
+                                <input className="form-control mb-3" type="text" name="accountholder_firstname" id="accountholder_firstname" placeholder="Johann" onChange={handleFormChange} />
                             </div>
                             <div className="last-name-container flex-grow-1">
-                                <label className="form-label text-black-50" htmlFor="last">Last Name</label>
-                                <input className="form-control mb-3" type="text" name="last" id="last" placeholder="Bach" onChange={handleFormChange} />
+                                <label className="form-label text-black-50" htmlFor="accountholder_lastname">Last Name</label>
+                                <input className="form-control mb-3" type="text" name="accountholder_lastname" id="accountholder_lastname" placeholder="Bach" onChange={handleFormChange} />
                             </div>
 
                             <div className="flex-grow-1 d-flex flex-column justify-content-center align-item-center">
                                 <div className="d-flex align-items-center">
                                     <label className="m-auto" htmlFor="parent" >Parent</label>
-                                    <input type="radio" name="role" id="parent" onChange={handleFormChange} />
+                                    <input type="radio" name="role" id="parent" value='parent' onChange={handleFormChange} />
                                 </div>
                                 <div className="d-flex align-items-center">
                                     <label className="m-auto" htmlFor="self">Self</label>
-                                    <input type="radio" name="role" id="self" onChange={handleFormChange} />
+                                    <input type="radio" name="role" id="self" value='self' onChange={handleFormChange} />
                                 </div>
                             </div>
                         </div>
@@ -101,7 +99,8 @@ function CreateNewAccount() {
 
                         <h2 className="mt-3 text-black-50">Students</h2>
                         <button onClick={addStudentCard}>Add Student</button>
-                        {Array.from({ length: numberOfStudents }, (_, i) => i).map((item, idx) => <StudentEnrollmentCard handleFormChange={handleFormChange} instruments={instruments} />)}
+                        {Array.from({ length: numberOfStudents }, (_, i) => i)
+                            .map((item, idx) => <StudentEnrollmentCard studentNumber={idx + 1} handleFormChange={handleFormChange} instruments={instruments} />)}
 
                         <h2 className="pt-3 text-black-50">Recommended Teacher</h2>
                         <div>

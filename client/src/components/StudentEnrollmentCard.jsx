@@ -1,13 +1,14 @@
 import Instrument from './Instrument'
 import LessonLengthSelector from './LessonLengthSelector'
 import { useState } from 'react';
-function StudentEnrollmentCard({ handleFormChange, instruments }) {
+function StudentEnrollmentCard({ handleFormChange, instruments, studentNumber }) {
     const [studentLabelNextToInstrumentHeading, setStudentLabelNextToInstrumentHeading] = useState('')
+
     function populateInstrumentSection(numberOfInstruments) {
         const instrumentAndLessonLengthArray = [];
         for (let i = 0; i < numberOfInstruments; i++) {
             const thisItem = {}
-            thisItem.instrument = <Instrument instrumentNumber={i + 1} instruments={instruments} handleFormChange={handleFormChange} />;
+            thisItem.instrument = <Instrument studentNumber={studentNumber} instrumentNumber={i + 1} instruments={instruments} handleFormChange={handleFormChange} />;
             thisItem.lessonLength = <LessonLengthSelector />
             instrumentAndLessonLengthArray.push(thisItem)
         }
@@ -24,7 +25,7 @@ function StudentEnrollmentCard({ handleFormChange, instruments }) {
             <div className="name-container d-flex">
                 <div className="first-name-container flex-grow-1">
                     <label className="form-label text-black-50" htmlFor="first">First Name</label>
-                    <input className="form-control mb-3" type="text" name="first" id="first" placeholder="Johann" onBlur={updateStudentLabelNextToInstrumentHeading} onChange={handleFormChange} />
+                    <input className="form-control mb-3" type="text" name={`student${studentNumber}first`} id="first" placeholder="Johann" onBlur={updateStudentLabelNextToInstrumentHeading} onChange={handleFormChange} />
                 </div>
                 <div className="last-name-container flex-grow-1">
                     <label className="form-label text-black-50" htmlFor="last">Last Name</label>
