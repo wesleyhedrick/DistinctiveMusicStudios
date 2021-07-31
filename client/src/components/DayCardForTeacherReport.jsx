@@ -60,7 +60,7 @@ function DayCardForTeacherReport({ dayOfWeek, formDataPerCard, formDataToDB }) {
         }
     }
 
-    // console.log('formDataForThisCard', formDataForThisCard)
+
     function addStudent() {
         setFormDataForThisCard([...formDataForThisCard,
         {

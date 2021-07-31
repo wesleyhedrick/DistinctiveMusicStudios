@@ -9,10 +9,10 @@ function NavBar({ changeDisplay, entity, controlsArray }) {
                 </button>
                 <ul className="navbar-nav">
                     {/* Build navbar with either admin or teacher controls */}
-                    {controlsArray.map(control =>
-                        <li className="nav-item">
-                            <a onClick={() => changeDisplay(control.toLowerCase())}
-                                className="nav-link" aria-current="page">{control}</a>
+                    {controlsArray.map((item, idx) =>
+                        <li key={idx} className="nav-item">
+                            <a onClick={() => changeDisplay(item.controlKey)}
+                                className="nav-link" aria-current="page">{item.controlLabel}</a>
                         </li>
                     )}
                 </ul>

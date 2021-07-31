@@ -1,4 +1,4 @@
-const { Student, Teacher } = require('../models');
+const { Student, Teacher, Instruments } = require('../models');
 
 const populateMonthlyReport = async (req, res) => {
     const students = await Student.findAll({
@@ -13,6 +13,18 @@ const populateMonthlyReport = async (req, res) => {
     res.json(students)
 }
 
+const getTeacherNamesAndInstruments = async (req, res) => {
+    const teacherNames = await Teacher.findAll({
+        attributes: ['id', 'first', 'last']
+    })
+
+    const instruments = await Instruments.findAll()
+    const teacherNamesAndInstruments = { teacherNames, instruments }
+
+    res.json(teacherNamesAndInstruments)
+}
+
 module.exports = {
-    populateMonthlyReport
+    populateMonthlyReport,
+    getTeacherNamesAndInstruments
 }

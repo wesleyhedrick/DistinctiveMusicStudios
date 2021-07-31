@@ -11,6 +11,13 @@ const sendPendingStudentDetail = async (req, res) => {
     res.json(data)
 }
 
+const sendGlobalListOfStudents = async (req, res) => {
+    console.log('sendGlobalListOfStudents ran')
+    const data = await Student.findAll()
+    res.json(data)
+}
+
+
 const sendPendingStudentSummary = async (req, res) => {
 
     const data = await Student.findAll({
@@ -26,7 +33,6 @@ const sendPendingStudentSummary = async (req, res) => {
 const sendCurrentStudents = async (req, res) => {
 
     const data = await Student.findAll({
-        attributes: ['first', 'last'],
         where: {
             status: 2,
             teacher: req.session.teacher
@@ -111,11 +117,22 @@ const sendCurrentReportData = async (req, res) => {
 
 }
 
+const enrollStudent = async (req, res) => {
+    const { body } = req
+    console.log(body)
+    await Student.create(body)
+    res.json({ message: "enrollStudent ran", body })
+}
+
+
+
 module.exports = {
     sendPendingStudentDetail,
     sendPendingStudentSummary,
     sendCurrentStudents,
     sendCurrentReportData,
-    processCurrentReportData
+    processCurrentReportData,
+    sendGlobalListOfStudents,
+    enrollStudent
 };
 

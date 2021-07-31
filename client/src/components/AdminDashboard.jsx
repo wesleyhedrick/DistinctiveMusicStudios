@@ -1,19 +1,24 @@
 import NavBar from "./NavBar"
 import { useState } from 'react'
+import HistoricalReportsLinks from "./HistoricalReportsLinks"
+import StudentList from "./StudentList"
+import NewStudentForm from "./NewStudentForm"
+import CreateNewAccount from "./CreateNewAccount"
+import { adminControls } from '../utilities/enums'
+
 function AdminMainDashboard() {
     const nathan = 'Nathan'
-    const adminControls = ['Students', 'Reports', 'Create New Student']
-    const [dashboardDisplay, setDashboardDisplay] = useState('reports')
+    const displayObject = {
+        'reports': <HistoricalReportsLinks />,
+        'students': <StudentList />,
+        'newAccount': <CreateNewAccount />
+    }
+
+    const [dashboardDisplay, setDashboardDisplay] = useState('')
 
     function changeDashboardDisplay(dashboardDisplay) {
-
-        if (dashboardDisplay == 'reports') {
-            return <p>Reports</p>
-        } else if (dashboardDisplay == 'students') {
-            return <p>Students</p>
-        } else {
-            return <p>New Student Form</p>
-        }
+        console.log(displayObject[dashboardDisplay])
+        return displayObject[dashboardDisplay]
     }
 
     return (
@@ -22,7 +27,9 @@ function AdminMainDashboard() {
                 changeDisplay={setDashboardDisplay}
                 entity={nathan}
                 controlsArray={adminControls} />
-            {changeDashboardDisplay(dashboardDisplay)}
+            <div >
+                {changeDashboardDisplay(dashboardDisplay)}
+            </div>
         </>
     )
 }
